@@ -1,0 +1,16 @@
+com\aicrm\config\MybatisPlusConfig.class
+com\aicrm\config\PasswordConfig.class
+com\aicrm\common\BusinessException.class
+com\aicrm\common\Result.class
+com\aicrm\SmartCrmApplication.class
+com\aicrm\controller\AuthController.class
+com\aicrm\vo\LoginVO.class
+com\aicrm\config\SaTokenConfig.class
+com\aicrm\init\DataInitializer.class
+com\aicrm\dto\LoginDTO.class
+com\aicrm\service\AuthService.class
+com\aicrm\common\PageResult.class
+com\aicrm\common\CurrentUser.class
+com\aicrm\common\GlobalExceptionHandler.class
+com\aicrm\mapper\SysUserMapper.class
+com\aicrm\entity\SysUser.class

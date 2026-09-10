@@ -1,0 +1,67 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-crm
+
+  # ---------- MySQL ----------
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # createDatabaseIfNotExist=true：第一次启动自动建 ai_crm 库
+    url: jdbc:mysql://127.0.0.1:3306/ai_crm?createDatabaseIfNotExist=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
+
+  # ---------- Redis ----------
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      password: ""        # 本机无密码留空；有密码改成你的
+      timeout: 5s
+
+  # ---------- 启动时自动建表（幂等，可重复执行）----------
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      continue-on-error: false
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true   # 数据库下划线 <-> 实体驼峰
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开发时打印 SQL，想看就打开
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-field: deleted        # 全局逻辑删除字段（实体里要有 deleted 字段）
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# ---------- Sa-Token ----------
+sa-token:
+  token-name: Authorization        # 前端请求头带 token 的 key
+  timeout: 2592000                 # token 有效期(秒) 30 天
+  active-timeout: -1               # 最低活跃频率，-1 不限制
+  is-concurrent: true              # 同一账号可多地登录
+  is-share: false
+  token-style: uuid
+  is-log: false
+
+# ---------- Knife4j / springdoc ----------
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+logging:
+  level:
+    com.aicrm: info
